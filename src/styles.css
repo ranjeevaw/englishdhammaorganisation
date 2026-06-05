@@ -1,0 +1,5 @@
+
+body{font-family:Arial,sans-serif;margin:0}
+.nav{display:flex;gap:20px;padding:16px;background:#8b5e3c}
+.nav a{color:white;text-decoration:none}
+.page{padding:30px;max-width:1000px;margin:auto}
