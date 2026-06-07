@@ -4,23 +4,22 @@ const events = [
   {
     id: 1,
     type: "upcoming",
-    title: "Monthly Dhamma Sermon",
-    date: "21 June 2026",
-    location: "Melbourne Buddhist Centre",
+    title: "Special Dhamma Sermon",
+    date: "20 June 2026, 5PM",
+    location: "English Dhamma Temple",
     photos: [
-      `${import.meta.env.BASE_URL}images/sermon1.jpg`,
       `${import.meta.env.BASE_URL}images/sermon2.jpg`,
       `${import.meta.env.BASE_URL}images/sermon3.jpg`,
     ],
     description:
-      "Join us for an inspiring Dhamma sermon followed by meditation and discussion.",
+      "Join us for an inspiring Dhamma sermon by renowned Hon Ven Kathnoruwe Siri Dhamma Himi. please register using the Register Now button in the Home page.",
   },
   {
     id: 2,
     type: "upcoming",
-    title: "Kathina Ceremony",
-    date: "15 October 2026",
-    location: "English Dhamma Organisation",
+    title: "Poson Sil Program",
+    date: "27 June 2026",
+    location: "English Dhamma Temple",
     photos: [
       `${import.meta.env.BASE_URL}images/kathina1.jpg`,
       `${import.meta.env.BASE_URL}images/kathina2.jpg`,
@@ -32,16 +31,16 @@ const events = [
   {
     id: 3,
     type: "past",
-    title: "Vesak Celebration 2025",
-    date: "10 May 2025",
-    location: "Melbourne",
+    title: "Maliyadeva OBA English Dhamma Temple Garden cleaning and car park creation project",
+    date: "31 May 2026",
+    location: "English Dhamma Temple",
     photos: [
       `${import.meta.env.BASE_URL}images/vesak1.jpg`,
       `${import.meta.env.BASE_URL}images/vesak2.jpg`,
       `${import.meta.env.BASE_URL}images/vesak3.jpg`,
     ],
     description:
-      "Community Vesak celebration with Dhamma talks, chanting and almsgiving.",
+      "Maliyadeva college OBA members organised a labor donation event where they cleaned the garden of the English Dhamma Temple, planted new plants, removed old shed to make space for the car park and enact a wall to support the car park space.",
   },
 ];
 
