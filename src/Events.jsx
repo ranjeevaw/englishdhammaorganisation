@@ -20,11 +20,16 @@ const events = [
     title: "Poson Sil Program",
     date: "27 June 2026",
     location: "English Dhamma Temple",
-    photos: [
-      `${import.meta.env.BASE_URL}images/kathina1.jpg`,
-      `${import.meta.env.BASE_URL}images/kathina2.jpg`,
-      `${import.meta.env.BASE_URL}images/kathina3.jpg`,
-    ],
+media: [
+  {
+    type: "image",
+    src: `${import.meta.env.BASE_URL}images/sermon2.jpg`,
+  },
+  {
+    type: "image",
+    src: `${import.meta.env.BASE_URL}images/sermon3.jpg`,
+  },
+]
     description:
       "Annual Kathina ceremony with offerings and blessings.",
   },
@@ -34,10 +39,19 @@ const events = [
     title: "Maliyadeva OBA English Dhamma Temple Garden cleaning and car park creation project",
     date: "31 May 2026",
     location: "English Dhamma Temple",
-    photos: [
-      `${import.meta.env.BASE_URL}images/vesak1.jpg`,
-      `${import.meta.env.BASE_URL}images/vesak2.jpg`,
-      `${import.meta.env.BASE_URL}images/vesak3.jpg`,
+    media: [
+    {
+      type: "image",
+      src: `${import.meta.env.BASE_URL}images/vesak1.jpg`,
+    },
+    {
+      type: "image",
+      src: `${import.meta.env.BASE_URL}images/vesak2.jpg`,
+    },
+    {
+      type: "video",
+      src: `${import.meta.env.BASE_URL}images/vesak3.mp4`,
+    },
     ],
     description:
       "Maliyadeva college OBA members organised a labor donation event where they cleaned the garden of the English Dhamma Temple, planted new plants, removed old shed to make space for the car park and enact a wall to support the car park space.",
@@ -59,15 +73,27 @@ const renderEvents = (eventList) =>
   eventList.map((event) => (
     <div key={event.id} className="sermon-card">
       <div className="event-gallery">
-        {event.photos.map((photo, index) => (
-          <img
-            key={index}
-            src={photo}
-            alt={`${event.title} ${index + 1}`}
-            className="gallery-thumb"
-            onClick={() => setSelectedImage(photo)}
-          />
-        ))}
+{event.media.map((item, index) => (
+  item.type === "image" ? (
+    <img
+      key={index}
+      src={item.src}
+      alt={`${event.title} ${index + 1}`}
+      className="gallery-thumb"
+      onClick={() => setSelectedImage(item.src)}
+    />
+  ) : (
+    <video
+      key={index}
+      className="gallery-thumb"
+      controls
+      preload="metadata"
+    >
+      <source src={item.src} type="video/mp4" />
+      Your browser does not support video playback.
+    </video>
+  )
+))}
       </div>
 
       <div className="sermon-content">
