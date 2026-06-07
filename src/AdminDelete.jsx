@@ -48,7 +48,7 @@ export default function AdminDelete() {
 
       alert("Appointment cancelled successfully");
 
-      navigate("/");
+      navigate("/alms-calendar");
     } catch (err) {
       console.error(err);
       setError("Failed to cancel appointment");
@@ -128,7 +128,7 @@ export default function AdminDelete() {
         </button>
 
         <button
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/alms-calendar")}
         >
           Back
         </button>

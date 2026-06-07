@@ -149,7 +149,7 @@ const dayPropGetter = (date) => {
   return (
     <div
       style={{
-        height: "100vh",
+        minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
       }}
@@ -158,7 +158,39 @@ const dayPropGetter = (date) => {
         📅 Appointments (දානය)  Calendar
       </h2>
 
-      <div style={{ flex: 1 }}>
+<div
+  style={{
+    margin: "10px",
+    padding: "15px",
+    background: "#fff8e8",
+    border: "1px solid #e0c97f",
+    borderRadius: "10px",
+    boxShadow: "0 2px 6px rgba(0,0,0,0.08)",
+  }}
+>
+  <h3 style={{ marginTop: 0 }}>
+    📝 Booking Instructions
+  </h3>
+
+  <ul style={{ marginBottom: 0 }}>
+    <li>On Mobile phones long press on an empty cell to start adding a new appointment.</li>
+    <li>Select an available future date on the calendar.</li>
+    <li>Choose the appropriate meal offering type.</li>
+    <li>Complete all required fields in the booking form.</li>
+    <li>Only one booking is allowed per meal slot per day.</li>
+    <li>Click an existing booking to view or edit it.</li>
+    <li>Past appointments cannot be modified.</li>
+    <li>If you still have problems please contact us from the Contact Us Page.</li>
+  </ul>
+</div>
+
+<div
+  style={{
+    height: "800px",
+    margin: "10px",
+  }}
+>
+
 <Calendar
   localizer={localizer}
   events={events}

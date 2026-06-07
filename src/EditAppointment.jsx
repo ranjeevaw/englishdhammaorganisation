@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import emailjs from "@emailjs/browser";
 import {
   useParams,
   useNavigate,
@@ -29,21 +30,28 @@ const [error, setError] = useState("");
 
   const [loading, setLoading] = useState(true);
 
-  const [appointment, setAppointment] = useState({
-    name: "",
-    purpose: "",
-    address: "",
-    apt_date: searchParams.get("date") || "",
-    apt_time: searchParams.get("time") || "",
-    details: "",
-    contact_number: "",
-  });
+const [appointment, setAppointment] = useState({
+  name: "",
+  purpose: "",
+  address: "",
+  email: "",
+  apt_date: searchParams.get("date") || "",
+  apt_time: searchParams.get("time") || "",
+  details: "",
+  contact_number: "",
+});
 
 const purposeOptions = [
   "Morning Alms - හීල් දානය",
   "Lunch Alms - දවල් දානය",
   "Evening Alms - ගිලන්පස",
 ];
+
+const purposeTimeMap = {
+  "Morning Alms - හීල් දානය": "06:30",
+  "Lunch Alms - දවල් දානය": "12:00",
+  "Evening Alms - ගිලන්පස": "18:00",
+};
 
   useEffect(() => {
     if (isNew) {
@@ -61,13 +69,13 @@ const loadAppointment = async () => {
 
     if (!snap.exists()) {
       alert("Appointment not found");
-      navigate("/");
+      navigate("/alms-calendar");
       return;
     }
 
     if (snap.data().deleted === true) {
       alert("This appointment has been deleted.");
-      navigate("/");
+      navigate("/alms-calendar");
       return;
     }
 
@@ -133,6 +141,12 @@ const validateRequiredFields = () => {
     return "Contact number is required";
   }
 
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+if (!emailRegex.test(appointment.email)) {
+  return "Please enter a valid email address";
+}
+
   if (!appointment.address.trim()) {
     return "Address is required";
   }
@@ -142,6 +156,30 @@ const validateRequiredFields = () => {
   }
 
   return null;
+};
+
+const sendAppointmentEmail = async (action) => {
+  try {
+    await emailjs.send(
+      "service_xtf9mt7",
+      "template_ultwh8g",
+      {
+        action,
+        name: appointment.name,
+        email: appointment.email,
+        purpose: appointment.purpose,
+        apt_date: appointment.apt_date,
+        apt_time: appointment.apt_time,
+        address: appointment.address,
+        contact_number: appointment.contact_number,
+        details: appointment.details,
+      },
+      "8G68XWPnW2CkhVGMW"
+    );
+  } catch (err) {
+    alert("Email sending failed. Please call and inform us. Details are there in the Contact us pagea! Thank you");
+    console.error("Email failed:", err);
+  }
 };
 
 const saveAppointment = async () => {
@@ -176,6 +214,8 @@ const saveAppointment = async () => {
         updated: new Date(),
       });
 
+await sendAppointmentEmail("Created");
+
       alert("Appointment created successfully");
     } else {
       await updateDoc(doc(db, "appointments", id), {
@@ -183,10 +223,12 @@ const saveAppointment = async () => {
         updated: new Date(),
       });
 
+await sendAppointmentEmail("Updated");
+
       alert("Appointment updated successfully");
     }
 
-    navigate("/");
+    navigate("/alms-calendar");
   } catch (err) {
     console.error(err);
     alert("Failed to save appointment");
@@ -209,7 +251,7 @@ await updateDoc(doc(db, "appointments", id), {
 
       alert("Appointment deleted");
 
-      navigate("/");
+      navigate("/alms-calendar");
     } catch (err) {
       console.error(err);
       alert("Failed to delete appointment");
@@ -250,9 +292,17 @@ await updateDoc(doc(db, "appointments", id), {
       fontSize: "16px",
     }}
     value={appointment.purpose}
-    onChange={(e) =>
-      handleChange("purpose", e.target.value)
-    }
+
+onChange={(e) => {
+  const selectedPurpose = e.target.value;
+
+  setAppointment((prev) => ({
+    ...prev,
+    purpose: selectedPurpose,
+    apt_time: purposeTimeMap[selectedPurpose] || "",
+  }));
+}}
+
   >
     <option value="">-- Select Purpose --</option>
 
@@ -291,6 +341,19 @@ await updateDoc(doc(db, "appointments", id), {
         />
       </div>
 
+<div style={{ marginBottom: 15 }}>
+  <label>Email Address</label>
+  <br />
+  <input
+    type="email"
+    style={{ width: "100%", padding: 8 }}
+    value={appointment.email}
+    onChange={(e) =>
+      handleChange("email", e.target.value)
+    }
+  />
+</div>
+
       <div style={{ marginBottom: 15 }}>
         <label>Date</label>
         <br />
@@ -304,18 +367,15 @@ await updateDoc(doc(db, "appointments", id), {
         />
       </div>
 
-      <div style={{ marginBottom: 15 }}>
-        <label>Time</label>
-        <br />
-        <input
-          type="time"
-          style={{ padding: 8 }}
-          value={appointment.apt_time}
-          onChange={(e) =>
-            handleChange("apt_time", e.target.value)
-          }
-        />
-      </div>
+<div style={{ marginBottom: 15 }}>
+  <label>Time</label>
+  <br />
+  <input
+    style={{ padding: 8 }}
+    value={appointment.apt_time}
+    readOnly
+  />
+</div>
 
       <div style={{ marginBottom: 15 }}>
         <label>Details</label>
@@ -353,7 +413,7 @@ await updateDoc(doc(db, "appointments", id), {
           Save
         </button>
 
-        <button onClick={() => navigate("/")}>
+        <button onClick={() => navigate("/alms-calendar")}>
           Cancel
         </button>
 
