@@ -6,7 +6,11 @@ const events = [
     title: "Monthly Dhamma Sermon",
     date: "21 June 2026",
     location: "Melbourne Buddhist Centre",
-    image: "/images/dhamma-sermon.jpg",
+    photos: [
+      `${import.meta.env.BASE_URL}images/sermon1.jpg`,
+      `${import.meta.env.BASE_URL}images/sermon2.jpg`,
+      `${import.meta.env.BASE_URL}images/sermon3.jpg`,
+    ],
     description:
       "Join us for an inspiring Dhamma sermon followed by meditation and discussion.",
   },
@@ -15,18 +19,13 @@ const events = [
     title: "Kathina Ceremony",
     date: "15 October 2026",
     location: "English Dhamma Organisation",
-    image: "/images/kathina.jpg",
+    photos: [
+      `${import.meta.env.BASE_URL}images/kathina1.jpg`,
+      `${import.meta.env.BASE_URL}images/kathina2.jpg`,
+      `${import.meta.env.BASE_URL}images/kathina3.jpg`,
+    ],
     description:
-      "Annual Kathina ceremony with offerings, blessings, and community gathering.",
-  },
-  {
-    id: 3,
-    title: "Meditation Retreat",
-    date: "12 December 2026",
-    location: "Retreat Centre",
-    image: "/images/meditation-retreat.jpg",
-    description:
-      "A one-day retreat focusing on mindfulness, concentration, and loving-kindness.",
+      "Annual Kathina ceremony with offerings and blessings.",
   },
 ];
 
@@ -39,14 +38,17 @@ export default function Events() {
 
       {events.map((event) => (
         <div key={event.id} className="sermon-card">
-          <img
-            src={event.image}
-            alt={event.title}
-            className="sermon-image"
-            onClick={() => setSelectedImage(event.image)}
-            style={{ cursor: "pointer" }}
-          />
-
+<div className="event-gallery">
+  {event.photos.map((photo, index) => (
+    <img
+      key={index}
+      src={photo}
+      alt={`${event.title} ${index + 1}`}
+      className="gallery-thumb"
+      onClick={() => setSelectedImage(photo)}
+    />
+  ))}
+</div>
           <div className="sermon-content">
             <h2>{event.title}</h2>
 
