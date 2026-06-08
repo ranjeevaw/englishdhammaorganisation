@@ -32,5 +32,37 @@ export default function NewsTicker() {
         </div>
       </div>
     </div>
+
+<div className="donation-card">
+  <img
+    src={`${import.meta.env.BASE_URL}images/donation.jpg`}
+    alt="Donation"
+    className="donation-image"
+  />
+
+  <h3>🙏 Support the English Dhamma Organisation</h3>
+
+  <p>
+    Your generous donations help support Dhamma teachings,
+    temple maintenance, community programs, and future projects.
+  </p>
+
+  <div className="donation-details">
+    <p><strong>Account Name:</strong> ENGLISH DHAMMA ORG</p>
+<p>
+  <strong>BSB:</strong> 013-542
+  <button onClick={() => navigator.clipboard.writeText("013542")}>
+    Copy
+  </button>
+</p>
+<p>
+  <strong>Account Number:</strong> 430308072
+  <button onClick={() => navigator.clipboard.writeText("013542")}>
+    Copy
+  </button>
+</p>
+    <p><strong>Reference:</strong> Donation</p>
+  </div>
+</div>
   );
 }

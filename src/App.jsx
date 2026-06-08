@@ -429,7 +429,7 @@ Our Chief Incumbent is the Most Venerable Rev. Sewanagala Nandarathana Thero. He
 
             <p>
               <strong>Email:</strong><br />
-              janakirajaguru@yahoo.com.au
+              englishdhamma21@gmail.com
             </p>
           </div>
 

@@ -685,3 +685,51 @@ body{font-family:Arial,sans-serif;margin:0}
   transform: scale(1.05);
 }
 
+.donation-card {
+  width: 320px;
+
+  background: linear-gradient(
+    135deg,
+    #fff8e8,
+    #ffffff
+  );
+
+  border: 1px solid #f0d9a0;
+  border-radius: 14px;
+
+  padding: 18px;
+  margin-top: 20px;
+
+  text-align: center;
+
+  box-shadow:
+    0 6px 16px rgba(0,0,0,0.08);
+}
+
+.donation-image {
+  width: 120px;
+  height: auto;
+
+  margin-bottom: 12px;
+}
+
+.donation-card h3 {
+  color: #7a5a00;
+  margin-top: 0;
+}
+
+.donation-details {
+  text-align: left;
+
+  background: #fffdf7;
+  padding: 12px;
+  border-radius: 8px;
+
+  margin-top: 15px;
+}
+
+.donation-details p {
+  margin: 6px 0;
+}
+
+

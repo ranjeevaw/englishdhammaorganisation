@@ -46,7 +46,7 @@ media: [
   {
     id: 3,
     type: "past",
-    title: "Mt Bandara's alms giving",
+    title: "Mr Bandara's alms giving",
     date: "06 June 2026",
     location: "English Dhamma Temple",
     media: [
@@ -95,12 +95,13 @@ media: [
       src: `${import.meta.env.BASE_URL}videos/b1.mp4`,
     },
     ],
-    description:
-       "Our heartfelt gratitude to our devotee, Mr. G. Bandara, for holding the Alms Giving Ceremony at our temple in remembrance of his beloved father and his former teachers.
-<br />
-May the merits of this wholesome offering be shared with his beloved father, his former teachers, and all departed loved ones. May Mr. G. Bandara and his family be blessed with good health, happiness, peace, and prosperity.
-<br />
-May all rejoice in these merits. 🙏",
+description: `Our heartfelt gratitude to our devotee, Mr. G. Bandara, for holding the Alms Giving Ceremony at our temple in remembrance of his beloved father and his former teachers.
+
+May the merits of this wholesome offering be shared with his beloved father, his former teachers, and all departed loved ones.
+
+May Mr. G. Bandara and his family be blessed with good health, happiness, peace, and prosperity.
+
+May all rejoice in these merits. 🙏`,
   },
   {
     id: 4,
@@ -176,7 +177,9 @@ const renderEvents = (eventList) =>
           <strong>Location:</strong> {event.location}
         </p>
 
-        <p>{event.description}</p>
+<p style={{ whiteSpace: "pre-line" }}>
+  {event.description}
+</p>
       </div>
     </div>
   ));
