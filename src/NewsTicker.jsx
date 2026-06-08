@@ -12,6 +12,8 @@ const news = [
 
 export default function NewsTicker() {
   return (
+    <div className="right-panel">
+
     <div className="news-card">
       <div className="news-title">📰 Latest News</div>
 
@@ -51,18 +53,50 @@ export default function NewsTicker() {
     <p><strong>Account Name:</strong> ENGLISH DHAMMA ORG</p>
 <p>
   <strong>BSB:</strong> 013-542
-  <button onClick={() => navigator.clipboard.writeText("013542")}>
+  <button className="copy-button" onClick={() => navigator.clipboard.writeText("013542")}>
     Copy
   </button>
 </p>
 <p>
   <strong>Account Number:</strong> 430308072
-  <button onClick={() => navigator.clipboard.writeText("013542")}>
+  <button className="copy-button" onClick={() => navigator.clipboard.writeText("430308072")}>
     Copy
   </button>
 </p>
     <p><strong>Reference:</strong> Donation</p>
   </div>
 </div>
-  );
+
+<div className="kathina-card">
+  <img
+    src={`${import.meta.env.BASE_URL}images/kathina-robe.jpg`}
+    alt="Kathina Robe"
+    className="kathina-image"
+  />
+
+  <h3>🟡 Kathina Ceremony 2026 Sponsorship Opportunity</h3>
+
+  <p>
+    The English Dhamma Temple warmly invites a generous
+    benefactor, family, or organization to become the
+    principal sponsor of the 2026 Kathina Ceremony.
+  </p>
+
+  <p>
+    This is a rare and highly meritorious opportunity to
+    support the Sangha and contribute towards the
+    preservation and propagation of the Buddha's teachings.
+  </p>
+
+  <p>
+    Please contact us if you would like to discuss this
+    special sponsorship opportunity.
+  </p>
+</div>
+
+
+</div>
+
+);
+
 }

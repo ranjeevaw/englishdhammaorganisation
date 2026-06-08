@@ -732,4 +732,139 @@ body{font-family:Arial,sans-serif;margin:0}
   margin: 6px 0;
 }
 
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.copy-button {
+  margin-left: 10px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.copy-button {
+  position: relative;
+  overflow: hidden;
+
+  margin-left: 10px;
+  padding: 6px 12px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: linear-gradient(
+    135deg,
+    #d4a017,
+    #f5d68a
+  );
+
+  color: white;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 2px 8px rgba(212,160,23,0.4);
+
+  transition: transform 0.2s ease;
+}
+
+.copy-button:hover {
+  transform: translateY(-1px);
+}
+
+.copy-button::before {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: -120%;
+
+  width: 60%;
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.8),
+    transparent
+  );
+
+  transform: skewX(-25deg);
+
+  animation: shine 2.5s infinite;
+}
+
+@keyframes shine {
+  0% {
+    left: -120%;
+  }
+
+  100% {
+    left: 150%;
+  }
+}
+
+.copy-button {
+  animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow:
+      0 0 5px rgba(212,160,23,0.4);
+  }
+
+  50% {
+    box-shadow:
+      0 0 18px rgba(212,160,23,0.8);
+  }
+
+  100% {
+    box-shadow:
+      0 0 5px rgba(212,160,23,0.4);
+  }
+}
+
+.kathina-card {
+  width: 320px;
+
+  margin-top: 20px;
+  padding: 18px;
+
+  background: linear-gradient(
+    135deg,
+    #fff8e8,
+    #ffffff
+  );
+
+  border: 1px solid #f0d9a0;
+  border-radius: 14px;
+
+  text-align: center;
+
+  box-shadow:
+    0 6px 16px rgba(0,0,0,0.08);
+}
+
+.kathina-image {
+  width: 100%;
+  max-height: 180px;
+
+  object-fit: cover;
+
+  border-radius: 10px;
+
+  margin-bottom: 12px;
+}
+
+.kathina-card h3 {
+  color: #7a5a00;
+  margin-top: 0;
+}
+
 
