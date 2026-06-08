@@ -7,10 +7,16 @@ const events = [
     title: "Special Dhamma Sermon",
     date: "20 June 2026, 5PM",
     location: "English Dhamma Temple",
-    photos: [
-      `${import.meta.env.BASE_URL}images/sermon2.jpg`,
-      `${import.meta.env.BASE_URL}images/sermon3.jpg`,
-    ],
+media: [
+  {
+    type: "image",
+    src: `${import.meta.env.BASE_URL}images/sermon2.jpg`,
+  },
+  {
+    type: "image",
+    src: `${import.meta.env.BASE_URL}images/sermon3.jpg`,
+  },
+],
     description:
       "Join us for an inspiring Dhamma sermon by renowned Hon Ven Kathnoruwe Siri Dhamma Himi. please register using the Register Now button in the Home page.",
   },
@@ -23,18 +29,81 @@ const events = [
 media: [
   {
     type: "image",
-    src: `${import.meta.env.BASE_URL}images/sermon2.jpg`,
+    src: `${import.meta.env.BASE_URL}images/kathina1.jpg`,
   },
   {
     type: "image",
-    src: `${import.meta.env.BASE_URL}images/sermon3.jpg`,
+    src: `${import.meta.env.BASE_URL}images/kathina2.jpg`,
   },
-]
+  {
+    type: "image",
+    src: `${import.meta.env.BASE_URL}images/kathina3.jpg`,
+  },
+],
     description:
       "Annual Kathina ceremony with offerings and blessings.",
   },
   {
     id: 3,
+    type: "past",
+    title: "Mt Bandara's alms giving",
+    date: "06 June 2026",
+    location: "English Dhamma Temple",
+    media: [
+    {
+      type: "image",
+      src: `${import.meta.env.BASE_URL}images/b1.JPG`,
+    },
+    {
+      type: "image",
+      src: `${import.meta.env.BASE_URL}images/b2.JPG`,
+    },
+    {
+      type: "image",
+      src: `${import.meta.env.BASE_URL}images/b3.JPG`,
+    },
+    {
+      type: "image",
+      src: `${import.meta.env.BASE_URL}images/b4.JPG`,
+    },
+    {
+      type: "image",
+      src: `${import.meta.env.BASE_URL}images/b5.JPG`,
+    },
+    {
+      type: "image",
+      src: `${import.meta.env.BASE_URL}images/b6.JPG`,
+    },
+    {
+      type: "image",
+      src: `${import.meta.env.BASE_URL}images/b7.JPG`,
+    },
+    {
+      type: "image",
+      src: `${import.meta.env.BASE_URL}images/b8.JPG`,
+    },
+    {
+      type: "image",
+      src: `${import.meta.env.BASE_URL}images/b9.JPG`,
+    },
+    {
+      type: "image",
+      src: `${import.meta.env.BASE_URL}images/b10.JPG`,
+    },
+    {
+      type: "video",
+      src: `${import.meta.env.BASE_URL}videos/b1.mp4`,
+    },
+    ],
+    description:
+       "Our heartfelt gratitude to our devotee, Mr. G. Bandara, for holding the Alms Giving Ceremony at our temple in remembrance of his beloved father and his former teachers.
+<br />
+May the merits of this wholesome offering be shared with his beloved father, his former teachers, and all departed loved ones. May Mr. G. Bandara and his family be blessed with good health, happiness, peace, and prosperity.
+<br />
+May all rejoice in these merits. 🙏",
+  },
+  {
+    id: 4,
     type: "past",
     title: "Maliyadeva OBA English Dhamma Temple Garden cleaning and car park creation project",
     date: "31 May 2026",
@@ -50,7 +119,7 @@ media: [
     },
     {
       type: "video",
-      src: `${import.meta.env.BASE_URL}images/vesak3.mp4`,
+      src: `${import.meta.env.BASE_URL}videos/vesak3.mp4`,
     },
     ],
     description:
