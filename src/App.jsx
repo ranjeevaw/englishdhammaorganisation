@@ -17,8 +17,6 @@ const Page = ({title, children}) => (
 
 export default function App() {
 
-  const [showPoster, setShowPoster] = useState(false);
-
 const [contactForm, setContactForm] = useState({
     name: "",
     email: "",
@@ -136,7 +134,38 @@ const sendContactEmail = async (e) => {
       <p>— Dhammapada Verse 1</p>
     </div>
 
+<div className="sermon-card">
 
+  <img
+    src={`${import.meta.env.BASE_URL}kathnan.jpg`}
+    alt="Recent Dhamma Sermon"
+    className="sermon-image"
+  />
+
+  <div className="sermon-content">
+
+    <h3>🙏 Most Recent Dhamma Sermon</h3>
+
+    <h2>
+      The hamma sermon by Kathnoruwe himi
+    </h2>
+
+    <p>
+      Our recent English Dhamma sermon was conducted by
+      <strong> Ven. Kathnoruwe Siri Dhamma Thero</strong>,
+      bringing together members of our community for an
+      inspiring discussion on mindfulness, wisdom and compassion.
+    </p>
+
+    <p>
+      We sincerely thank everyone who attended and supported
+      this event. We look forward to welcoming you to our
+      future Dhamma programs.
+    </p>
+
+  </div>
+
+</div>
 
     <div className="activities-card">
       <h3>Our Activities</h3>
@@ -536,30 +565,7 @@ Our Chief Incumbent is the Most Venerable Rev. Sewanagala Nandarathana Thero. He
   </div>
 </footer>
 
-    {showPoster && (
-      <div
-        className="poster-overlay"
-        onClick={() => setShowPoster(false)}
-      >
-        <div
-          className="poster-modal"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <button
-            className="close-button"
-            onClick={() => setShowPoster(false)}
-          >
-            ✕
-          </button>
 
-          <img
-            src={`${import.meta.env.BASE_URL}kathn.jpg`}
-            alt="Event Poster"
-            className="poster-image"
-          />
-        </div>
-      </div>
-    )}
 
     </>
   );
