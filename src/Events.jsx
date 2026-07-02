@@ -44,7 +44,7 @@ media: [
       "Annual Kathina ceremony with offerings and blessings.",
   },
   {
-    id: 3,
+    id: 5,
     type: "past",
     title: "Mr Bandara's alms giving",
     date: "06 June 2026",
@@ -126,6 +126,53 @@ May all rejoice in these merits. 🙏`,
     description:
       "Maliyadeva college OBA members organised a labor donation event where they cleaned the garden of the English Dhamma Temple, planted new plants, removed old shed to make space for the car park and enact a wall to support the car park space.",
   },
+    {
+      id: 3,
+      type: "past",
+      title: "Dhamma sermon by Most ven Kathnoruwe SiriDhamma himi",
+      date: "20 June 2026",
+      location: "English Dhamma Temple",
+      media: [
+      {
+        type: "image",
+        src: `${import.meta.env.BASE_URL}images/k1.JPG`,
+      },
+      {
+        type: "image",
+        src: `${import.meta.env.BASE_URL}images/k2.JPG`,
+      },
+        {
+          type: "image",
+          src: `${import.meta.env.BASE_URL}images/k3.jpg`,
+        },
+        {
+          type: "image",
+          src: `${import.meta.env.BASE_URL}images/k4.jpg`,
+        },
+        {
+          type: "image",
+          src: `${import.meta.env.BASE_URL}images/k5.jpg`,
+        },
+        {
+          type: "image",
+          src: `${import.meta.env.BASE_URL}images/k6.jpg`,
+        },
+        {
+          type: "image",
+          src: `${import.meta.env.BASE_URL}images/k7.jpg`,
+        },
+        {
+          type: "image",
+          src: `${import.meta.env.BASE_URL}images/k9.jpg`,
+        },
+        {
+          type: "image",
+          src: `${import.meta.env.BASE_URL}images/k10.jpg`,
+        },
+      ],
+      description:
+        "Maliyadeva college OBA members organised a labor donation event where they cleaned the garden of the English Dhamma Temple, planted new plants, removed old shed to make space for the car park and enact a wall to support the car park space.",
+    },
 ];
 
 export default function Events() {

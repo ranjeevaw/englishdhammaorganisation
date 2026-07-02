@@ -2,13 +2,13 @@ import { useState } from "react";
 
 const news = [
   "📢 Special Dhamma sermon by Hon. Ven. Kathnoruwe Siri Dhamma himi on 20th June Saturday at 5pm in English Dhamma Temple",
-  "🪷 Sunday dhamma school students go on drama escursion on 14th June Sunday at 3pm in Cranbourne Community Theatre",
+  "🪷 Sunday dhamma school students go on drama excursion on 14th June Sunday at 3pm in Cranbourne Community Theatre",
   "📅 Alms calendar bookings now open",
   "🙏 Sunday Dhamma school kids enthusiastically participated for the Sil program!",
   "📖 Sunday School registrations are open",
-  "🌿 Sil program organized comemorating Vesak festival held successfully on May, 2026",
+  "🌿 Sil program organized comemorating Poson festival held successfully on 27 June, 2026",
   "🎓 Sunday dhamma school students paricipated for the valuable tour of parliament excursion",
-  "🤝 Volunteers needed for upcoming community event, Dhamma sermon by Kathnoruwe Siri Dhamma himi on 20th June, help needed on 19th June to prepare for the event",
+  "🤝 Temple car park is now open, we have capacity to park inside temple",
 ];
 
 export default function NewsTicker() {
