@@ -133,6 +133,26 @@ const sendContactEmail = async (e) => {
 
       <p>— Dhammapada Verse 1</p>
     </div>
+    <div className="quote-card">
+      <h3>Support the English Dhamma Temple</h3>
+
+      <p>The English Dhamma Temple relies entirely on the generosity of our supporters to meet its ongoing operating expenses and
+          continue serving the community.<br />
+
+         We humbly invite you to support the temple through your generous donations. Every contribution, no matter the amount,
+         helps us maintain this peaceful place of worship and learning for present and future generations.<br /><br />
+
+         Our current monthly expenses include: <br />
+
+         Mortgage: $5,215 <br />
+         Gas: $1,270 <br />
+         Electricity: $260 <br />
+<br />
+         Your kindness and generosity enable us to continue offering Dhamma teachings, meditation programs,
+         community activities, and spiritual guidance to all. <br />
+
+         May your generosity bring you and your loved ones peace, happiness, and abundant merit.</p>
+    </div>
 
 <div className="sermon-card">
 
@@ -171,7 +191,7 @@ const sendContactEmail = async (e) => {
       <h3>Our Activities</h3>
 
       <ul>
-        <li>🪷 Poson Sil program on 27th June, All are welcome!</li>
+        <li>🪷 Esala Sil program on TBD, All are welcome!</li>
         <li>📖 Spread the word! We welcome students for our Dhamma school!</li>
         <li>🎓 English Dhamma Sunday School</li>
         <li>🙏 Almsgiving & Merit Sharing Programs, Go to the Alms calendar and reserve your date for Alms giving programs!</li>
@@ -390,7 +410,7 @@ Our Chief Incumbent is the Most Venerable Rev. Sewanagala Nandarathana Thero. He
 
             <p>
               <strong>Address:</strong><br />
-              9 Bernal East Road, Gembrook
+              9 Beenak East Road, Gembrook
             </p>
 
             <p>

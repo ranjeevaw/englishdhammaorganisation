@@ -1,48 +1,66 @@
 import { useState } from "react";
 
 const events = [
-  {
-    id: 1,
-    type: "upcoming",
-    title: "Special Dhamma Sermon",
-    date: "20 June 2026, 5PM",
-    location: "English Dhamma Temple",
-media: [
-  {
-    type: "image",
-    src: `${import.meta.env.BASE_URL}images/sermon2.jpg`,
-  },
-  {
-    type: "image",
-    src: `${import.meta.env.BASE_URL}images/sermon3.jpg`,
-  },
-],
-    description:
-      "Join us for an inspiring Dhamma sermon by renowned Hon Ven Kathnoruwe Siri Dhamma Himi. please register using the Register Now button in the Home page.",
-  },
+
   {
     id: 2,
     type: "upcoming",
-    title: "Poson Sil Program",
-    date: "27 June 2026",
+    title: "Esala Sil Program",
+    date: "TBD",
     location: "English Dhamma Temple",
 media: [
-  {
-    type: "image",
-    src: `${import.meta.env.BASE_URL}images/kathina1.jpg`,
-  },
-  {
-    type: "image",
-    src: `${import.meta.env.BASE_URL}images/kathina2.jpg`,
-  },
-  {
-    type: "image",
-    src: `${import.meta.env.BASE_URL}images/kathina3.jpg`,
-  },
+
 ],
     description:
       "Annual Kathina ceremony with offerings and blessings.",
   },
+    {
+        id: 3,
+        type: "past",
+        title: "Dhamma sermon by Most ven Kathnoruwe SiriDhamma himi",
+        date: "20 June 2026",
+        location: "English Dhamma Temple",
+        media: [
+        {
+          type: "image",
+          src: `${import.meta.env.BASE_URL}images/k1.jpg`,
+        },
+        {
+          type: "image",
+          src: `${import.meta.env.BASE_URL}images/k2.jpg`,
+        },
+          {
+            type: "image",
+            src: `${import.meta.env.BASE_URL}images/k3.jpg`,
+          },
+          {
+            type: "image",
+            src: `${import.meta.env.BASE_URL}images/k4.jpg`,
+          },
+          {
+            type: "image",
+            src: `${import.meta.env.BASE_URL}images/k5.jpg`,
+          },
+          {
+            type: "image",
+            src: `${import.meta.env.BASE_URL}images/k6.jpg`,
+          },
+          {
+            type: "image",
+            src: `${import.meta.env.BASE_URL}images/k7.jpg`,
+          },
+          {
+            type: "image",
+            src: `${import.meta.env.BASE_URL}images/k9.jpg`,
+          },
+          {
+            type: "image",
+            src: `${import.meta.env.BASE_URL}images/k10.jpg`,
+          },
+        ],
+        description:
+          "Dhamma sermon by Kathnoruwe Siridhamma himi was conducted on 20th June amidst a big crowd. Everybody loved the sermon and enjoyed the dinner provided by English dhamma org members.",
+      },
   {
     id: 5,
     type: "past",
@@ -126,53 +144,7 @@ May all rejoice in these merits. 🙏`,
     description:
       "Maliyadeva college OBA members organised a labor donation event where they cleaned the garden of the English Dhamma Temple, planted new plants, removed old shed to make space for the car park and enact a wall to support the car park space.",
   },
-    {
-      id: 3,
-      type: "past",
-      title: "Dhamma sermon by Most ven Kathnoruwe SiriDhamma himi",
-      date: "20 June 2026",
-      location: "English Dhamma Temple",
-      media: [
-      {
-        type: "image",
-        src: `${import.meta.env.BASE_URL}images/k1.JPG`,
-      },
-      {
-        type: "image",
-        src: `${import.meta.env.BASE_URL}images/k2.JPG`,
-      },
-        {
-          type: "image",
-          src: `${import.meta.env.BASE_URL}images/k3.jpg`,
-        },
-        {
-          type: "image",
-          src: `${import.meta.env.BASE_URL}images/k4.jpg`,
-        },
-        {
-          type: "image",
-          src: `${import.meta.env.BASE_URL}images/k5.jpg`,
-        },
-        {
-          type: "image",
-          src: `${import.meta.env.BASE_URL}images/k6.jpg`,
-        },
-        {
-          type: "image",
-          src: `${import.meta.env.BASE_URL}images/k7.jpg`,
-        },
-        {
-          type: "image",
-          src: `${import.meta.env.BASE_URL}images/k9.jpg`,
-        },
-        {
-          type: "image",
-          src: `${import.meta.env.BASE_URL}images/k10.jpg`,
-        },
-      ],
-      description:
-        "Maliyadeva college OBA members organised a labor donation event where they cleaned the garden of the English Dhamma Temple, planted new plants, removed old shed to make space for the car park and enact a wall to support the car park space.",
-    },
+
 ];
 
 export default function Events() {

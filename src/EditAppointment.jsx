@@ -45,12 +45,17 @@ const purposeOptions = [
   "Morning Alms - හීල් දානය",
   "Lunch Alms - දවල් දානය",
   "Evening Alms - ගිලන්පස",
+  "Appointments",
+  "Invitations for පිරිත් and බණ",
 ];
 
 const purposeTimeMap = {
   "Morning Alms - හීල් දානය": "06:30",
   "Lunch Alms - දවල් දානය": "12:00",
   "Evening Alms - ගිලන්පස": "18:00",
+   // No fixed time for these
+   "Appointments": "",
+   "Invitations for පිරිත් and බණ": "",
 };
 
   useEffect(() => {
@@ -103,29 +108,129 @@ const handleChange = (field, value) => {
 const validateAppointment = async () => {
   const q = query(
     collection(db, "appointments"),
-    where("apt_date", "==", appointment.apt_date),
-    where("purpose", "==", appointment.purpose)
+    where("apt_date", "==", appointment.apt_date)
   );
 
   const snapshot = await getDocs(q);
 
-  const activeAppointments = snapshot.docs.filter(
-    (docSnap) => {
-      const data = docSnap.data();
+  // Ignore deleted appointments and the current document when editing
+  const existingAppointments = snapshot.docs.filter((docSnap) => {
+    const data = docSnap.data();
 
-      return data.deleted !== true;
+    if (data.deleted === true) {
+      return false;
     }
-  );
 
-  if (isNew) {
-    return activeAppointments.length === 0;
+    if (!isNew && docSnap.id === id) {
+      return false;
+    }
+
+    return true;
+  });
+
+  // -------------------------------------------------------
+  // Rule 1:
+  // Only one Morning/Lunch/Evening Alms per day
+  // -------------------------------------------------------
+
+  const isAlms =
+    appointment.purpose === "Morning Alms - හීල් දානය" ||
+    appointment.purpose === "Lunch Alms - දවල් දානය" ||
+    appointment.purpose === "Evening Alms - ගිලන්පස";
+
+  if (isAlms) {
+    const samePurposeExists = existingAppointments.some(
+      (docSnap) =>
+        docSnap.data().purpose === appointment.purpose
+    );
+
+    if (samePurposeExists) {
+      return {
+        valid: false,
+        message: `${appointment.purpose} has already been booked for ${appointment.apt_date}.`,
+      };
+    }
   }
 
-  const conflictingDocs = activeAppointments.filter(
-    (docSnap) => docSnap.id !== id
+  // -------------------------------------------------------
+  // Rule 2:
+  // No booking may be within 30 minutes of another booking
+  // -------------------------------------------------------
+
+if (appointment.apt_time) {
+  const toMinutes = (time) => {
+    const [h, m] = time.split(":").map(Number);
+    return h * 60 + m;
+  };
+
+  const getBookingWindow = (purpose, time) => {
+    switch (purpose) {
+      case "Morning Alms - හීල් දානය":
+        return {
+          start: toMinutes("06:30"),
+          end: toMinutes("07:30"),
+        };
+
+      case "Lunch Alms - දවල් දානය":
+        return {
+          start: toMinutes("11:30"),
+          end: toMinutes("12:30"),
+        };
+
+      case "Evening Alms - ගිලන්පස":
+        return {
+          start: toMinutes("17:30"),
+          end: toMinutes("18:30"),
+        };
+
+      default: {
+        const start = toMinutes(time);
+
+        return {
+          start,
+          end: start + 30,
+        };
+      }
+    }
+  };
+
+  const newWindow = getBookingWindow(
+    appointment.purpose,
+    appointment.apt_time
   );
 
-  return conflictingDocs.length === 0;
+  const clash = existingAppointments.find((docSnap) => {
+    const data = docSnap.data();
+
+    if (!data.apt_time) {
+      return false;
+    }
+
+    const existingWindow = getBookingWindow(
+      data.purpose,
+      data.apt_time
+    );
+
+    return (
+      newWindow.start < existingWindow.end &&
+      newWindow.end > existingWindow.start
+    );
+  });
+
+  if (clash) {
+    return {
+      valid: false,
+      message:
+        `This booking clashes with an existing ${clash.data().purpose} ` +
+        `scheduled at ${clash.data().apt_time}. Please choose another time.`,
+    };
+  }
+}
+
+  return {
+    valid: true,
+    message: "",
+  };
 };
 
 const validateRequiredFields = () => {
@@ -192,14 +297,12 @@ const saveAppointment = async () => {
 
   setError("");
 
-  const valid = await validateAppointment();
+const validation = await validateAppointment();
 
-  if (!valid) {
-    setError(
-      `${appointment.purpose} has already been booked for ${appointment.apt_date}. Please choose another date or meal slot.`
-    );
-    return;
-  }
+if (!validation.valid) {
+  setError(validation.message);
+  return;
+}
 
   setError("");
 
@@ -371,9 +474,17 @@ onChange={(e) => {
   <label>Time</label>
   <br />
   <input
+    type="time"
     style={{ padding: 8 }}
     value={appointment.apt_time}
-    readOnly
+    onChange={(e) => handleChange("apt_time", e.target.value)}
+    readOnly={
+      appointment.purpose === "Morning Alms - හීල් දානය" ||
+      appointment.purpose === "Lunch Alms - දවල් දානය" ||
+      appointment.purpose === "Evening Alms - ගිලන්පස"
+    }
+    placeholder="Enter a time if applicable"
+    step="300"
   />
 </div>
 
