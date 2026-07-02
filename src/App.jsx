@@ -137,7 +137,7 @@ const sendContactEmail = async (e) => {
 <div className="sermon-card">
 
   <img
-    src={`${import.meta.env.BASE_URL}kathnan.jpg`}
+    src={`${import.meta.env.BASE_URL}kathnan.JPG`}
     alt="Recent Dhamma Sermon"
     className="sermon-image"
   />
@@ -147,7 +147,7 @@ const sendContactEmail = async (e) => {
     <h3>🙏 Most Recent Dhamma Sermon</h3>
 
     <h2>
-      The hamma sermon by Kathnoruwe himi
+      The dhamma sermon by Kathnoruwe himi
     </h2>
 
     <p>
