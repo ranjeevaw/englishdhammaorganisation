@@ -136,46 +136,7 @@ const sendContactEmail = async (e) => {
       <p>— Dhammapada Verse 1</p>
     </div>
 
-<div className="sermon-card">
 
-  <img
-    src={`${import.meta.env.BASE_URL}sermon.jpg`}
-    alt="Weekly Dhamma Sermon"
-    className="sermon-image"
-  />
-
-  <div className="sermon-content">
-
-    <h3>🎙️ Featured Dhamma Sermon</h3>
-
-    <h2>
-      The Path to Inner Peace Through Mindfulness
-    </h2>
-
-    <p>
-      Join Ven. Kathnoruwe Siri Dhamma Thero for an
-      inspiring Dhamma sermon exploring how mindfulness,
-      wisdom, and compassion can help us overcome stress,
-      cultivate inner peace, and live more meaningful lives.
-    </p>
-
-    <p>
-      This discussion focuses on practical ways to
-      apply the Buddha's teachings in our daily lives,
-      helping us develop clarity, kindness, and emotional
-      balance.
-    </p>
-
-<button
-  className="sermon-button"
-  onClick={() => setShowPoster(true)}
->
-  Register Now
-</button>
-
-  </div>
-
-</div>
 
     <div className="activities-card">
       <h3>Our Activities</h3>
@@ -448,7 +409,7 @@ Our Chief Incumbent is the Most Venerable Rev. Sewanagala Nandarathana Thero. He
 
             <p>
               <strong>Email:</strong><br />
-              snanda9511@gmail.com
+              englishdhamma21@gmail.com
             </p>
           </div>
 

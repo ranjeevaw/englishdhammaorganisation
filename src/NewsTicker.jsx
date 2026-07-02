@@ -1,3 +1,4 @@
+import { useState } from "react";
 
 const news = [
   "📢 Special Dhamma sermon by Hon. Ven. Kathnoruwe Siri Dhamma himi on 20th June Saturday at 5pm in English Dhamma Temple",
@@ -11,6 +12,18 @@ const news = [
 ];
 
 export default function NewsTicker() {
+  const [copied, setCopied] = useState("");
+
+  const copyText = (text, key) => {
+    navigator.clipboard.writeText(text);
+
+    setCopied(key);
+
+    setTimeout(() => {
+      setCopied("");
+    }, 2000);
+  };
+
   return (
     <div className="right-panel">
 
@@ -51,18 +64,37 @@ export default function NewsTicker() {
 
   <div className="donation-details">
     <p><strong>Account Name:</strong> ENGLISH DHAMMA ORG</p>
+
 <p>
   <strong>BSB:</strong> 013-542
-  <button className="copy-button" onClick={() => navigator.clipboard.writeText("013542")}>
-    Copy
+
+  <button
+    className={`copy-button ${
+      copied === "bsb" ? "copied" : ""
+    }`}
+    onClick={() => copyText("013542", "bsb")}
+  >
+    {copied === "bsb" ? "✓ Copied" : "Copy"}
   </button>
 </p>
+
 <p>
   <strong>Account Number:</strong> 430308072
-  <button className="copy-button" onClick={() => navigator.clipboard.writeText("430308072")}>
-    Copy
+
+  <button
+    className={`copy-button ${
+      copied === "account" ? "copied" : ""
+    }`}
+    onClick={() =>
+      copyText("430308072", "account")
+    }
+  >
+    {copied === "account"
+      ? "✓ Copied"
+      : "Copy"}
   </button>
 </p>
+
     <p><strong>Reference:</strong> Donation</p>
   </div>
 </div>
