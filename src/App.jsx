@@ -7,6 +7,9 @@ import AdminDelete from "./AdminDelete";
 import NewsTicker from "./NewsTicker";
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
+import AdminLogin from "./AdminLogin";
+import BookingView from "./BookingView";
+import CancelledAppointments from "./CancelledAppointments";
 
 const Page = ({title, children}) => (
   <div className="page">
@@ -157,11 +160,39 @@ const sendContactEmail = async (e) => {
 <div className="sermon-card">
 
   <img
-    src={`${import.meta.env.BASE_URL}/images/kathnan.jpg`}
-    alt="Recent Dhamma Sermon"
+    src={`${import.meta.env.BASE_URL}/images/vas.jpg`}
+    alt="Vas Invitation"
     className="sermon-image"
   />
+  <div className="sermon-content">
 
+    <h3>🙏 Vas Invitation Ceremony is on 29th July, 2026</h3>
+
+    <h2>
+      Vas Invitation Ceremony is on 29th July
+    </h2>
+
+    <p>
+      It's almost Esala poya and time to invite our reverend for the Vas ceremony.
+    </p>
+
+    <p>
+      Our reverend will devote to do meritorious deeds during this precious vas period and as devotees we need to invite the reverend.
+      We planned the ceremony on 29th July, Wednesday at 6pm (until 9pm). <br />
+      All are welcome!
+    </p>
+
+  </div>
+
+</div>
+
+<div className="sermon-card">
+
+  <img
+    src={`${import.meta.env.BASE_URL}/images/kathnan.jpg`}
+    alt="Recent Dhamma sermon"
+    className="sermon-image"
+  />
   <div className="sermon-content">
 
     <h3>🙏 Most Recent Dhamma Sermon</h3>
@@ -395,7 +426,10 @@ Our Chief Incumbent is the Most Venerable Rev. Sewanagala Nandarathana Thero. He
   path="/appointment/:id"
   element={<AppointmentDetails />}
 />
-
+<Route
+    path="/cancelled/:id"
+    element={<CancelledAppointments />}
+/>
 <Route
   path="/contact"
   element={
@@ -542,6 +576,16 @@ Our Chief Incumbent is the Most Venerable Rev. Sewanagala Nandarathana Thero. He
   }
 />
 
+<Route
+    path="/admin-login"
+    element={<AdminLogin />}
+/>
+
+<Route
+    path="/booking/:id"
+    element={<BookingView />}
+/>
+
 </Routes>
 
 <footer className="footer">
@@ -569,7 +613,7 @@ Our Chief Incumbent is the Most Venerable Rev. Sewanagala Nandarathana Thero. He
     <div className="footer-section">
       <h3>Contact</h3>
 
-      <p>📍 9 Bernal East Road, Gembrook</p>
+      <p>📍 9 Beenak East Road, Gembrook</p>
       <p>📧 englishdhamma21@gmail.com</p>
       <p>📞 +61 406 422 873</p>
     </div>

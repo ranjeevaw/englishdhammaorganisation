@@ -23,12 +23,27 @@ import {
 export default function EditAppointment() {
   const { id } = useParams();
   const navigate = useNavigate();
+
+const isAdmin =
+    sessionStorage.getItem("isAdmin") === "true";
+
+const isNew = !id;
+
+useEffect(() => {
+    // Anyone can create a new booking.
+    // Only admins can edit an existing booking.
+    if (!isNew && !isAdmin) {
+        navigate("/alms-calendar");
+    }
+}, [isAdmin, isNew, navigate]);
+
   const [searchParams] = useSearchParams();
 
 const [error, setError] = useState("");
-  const isNew = !id;
+  //const isNew = !id;
 
   const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
 
 const [appointment, setAppointment] = useState({
   name: "",
@@ -37,6 +52,7 @@ const [appointment, setAppointment] = useState({
   email: "",
   apt_date: searchParams.get("date") || "",
   apt_time: searchParams.get("time") || "",
+  duration: 30,
   details: "",
   contact_number: "",
 });
@@ -163,41 +179,41 @@ if (appointment.apt_time) {
     return h * 60 + m;
   };
 
-  const getBookingWindow = (purpose, time) => {
-    switch (purpose) {
-      case "Morning Alms - හීල් දානය":
-        return {
-          start: toMinutes("06:30"),
-          end: toMinutes("07:30"),
-        };
+const getBookingWindow = (purpose, time, duration = 30) => {
+  switch (purpose) {
+    case "Morning Alms - හීල් දානය":
+      return {
+        start: toMinutes("06:30"),
+        end: toMinutes("07:30"),
+      };
 
-      case "Lunch Alms - දවල් දානය":
-        return {
-          start: toMinutes("11:30"),
-          end: toMinutes("12:30"),
-        };
+    case "Lunch Alms - දවල් දානය":
+      return {
+        start: toMinutes("11:30"),
+        end: toMinutes("12:30"),
+      };
 
-      case "Evening Alms - ගිලන්පස":
-        return {
-          start: toMinutes("17:30"),
-          end: toMinutes("18:30"),
-        };
+    case "Evening Alms - ගිලන්පස":
+      return {
+        start: toMinutes("17:30"),
+        end: toMinutes("18:30"),
+      };
 
-      default: {
-        const start = toMinutes(time);
-
-        return {
-          start,
-          end: start + 30,
-        };
-      }
+    default: {
+      const start = toMinutes(time);
+      return {
+        start,
+        end: start + duration,
+      };
     }
-  };
+  }
+};
 
-  const newWindow = getBookingWindow(
-    appointment.purpose,
-    appointment.apt_time
-  );
+const newWindow = getBookingWindow(
+  appointment.purpose,
+  appointment.apt_time,
+  appointment.duration
+);
 
   const clash = existingAppointments.find((docSnap) => {
     const data = docSnap.data();
@@ -206,14 +222,17 @@ if (appointment.apt_time) {
       return false;
     }
 
-    const existingWindow = getBookingWindow(
-      data.purpose,
-      data.apt_time
-    );
+const existingWindow = getBookingWindow(
+  data.purpose,
+  data.apt_time,
+  data.duration
+);
+
+    const BUFFER = 30; // minutes
 
     return (
-      newWindow.start < existingWindow.end &&
-      newWindow.end > existingWindow.start
+      newWindow.start < (existingWindow.end + BUFFER) &&
+      newWindow.end > (existingWindow.start - BUFFER)
     );
   });
 
@@ -265,6 +284,7 @@ if (!emailRegex.test(appointment.email)) {
 
 const sendAppointmentEmail = async (action) => {
   try {
+      setSaving(true);
     await emailjs.send(
       "service_xtf9mt7",
       "template_ultwh8g",
@@ -282,7 +302,8 @@ const sendAppointmentEmail = async (action) => {
       "8G68XWPnW2CkhVGMW"
     );
   } catch (err) {
-    alert("Email sending failed. Please call and inform us. Details are there in the Contact us pagea! Thank you");
+      setSaving(false);
+    //alert("Email sending failed. Please call and inform us. Details are there in the Contact us page! Thank you");
     console.error("Email failed:", err);
   }
 };
@@ -317,18 +338,21 @@ if (!validation.valid) {
         updated: new Date(),
       });
 
-await sendAppointmentEmail("Created");
+alert("Appointment created successfully");
 
-      alert("Appointment created successfully");
+// Send email in background
+sendAppointmentEmail("Created");
+
     } else {
       await updateDoc(doc(db, "appointments", id), {
         ...appointment,
         updated: new Date(),
       });
 
-await sendAppointmentEmail("Updated");
+alert("Appointment updated successfully");
 
-      alert("Appointment updated successfully");
+// Send email in background
+sendAppointmentEmail("Updated");
     }
 
     navigate("/alms-calendar");
@@ -367,6 +391,64 @@ await updateDoc(doc(db, "appointments", id), {
 
   return (
     <div style={{ maxWidth: 800, margin: "20px auto", padding: 20 }}>
+        {saving && (
+          <div
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: "100vw",
+              height: "100vh",
+              backgroundColor: "rgba(255,255,255,0.90)",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              zIndex: 99999,
+              backdropFilter: "blur(2px)"
+            }}
+          >
+
+            <div
+              style={{
+                width: "70px",
+                height: "70px",
+                border: "8px solid #e0e0e0",
+                borderTop: "8px solid #8b0000",
+                borderRadius: "50%",
+                animation: "spin 1s linear infinite"
+              }}
+            />
+
+            <h2
+              style={{
+                marginTop: "30px",
+                color: "#8b0000"
+              }}
+            >
+              Creating Appointment
+            </h2>
+
+            <p
+              style={{
+                fontSize: "18px",
+                textAlign: "center",
+                maxWidth: "420px"
+              }}
+            >
+              Please wait while your booking is being created.
+            </p>
+
+            <p
+              style={{
+                color: "#666"
+              }}
+            >
+              Please don't refresh or close this page.
+            </p>
+
+          </div>
+        )}
       <h2>
         {isNew
           ? "New Appointment"
@@ -488,6 +570,40 @@ onChange={(e) => {
   />
 </div>
 
+{(appointment.purpose === "Appointments" ||
+  appointment.purpose === "Invitations for පිරිත් and බණ") && (
+  <div style={{ marginBottom: 15 }}>
+    <label>Duration</label>
+    <br />
+    <select
+      style={{ padding: 8 }}
+      value={appointment.duration}
+      onChange={(e) =>
+        handleChange("duration", Number(e.target.value))
+      }
+    >
+      <option value={30}>30 minutes</option>
+      <option value={60}>1 hour</option>
+      <option value={90}>1 hour 30 minutes</option>
+      <option value={120}>2 hours</option>
+      <option value={150}>2 hours 30 minutes</option>
+      <option value={180}>3 hours</option>
+      <option value={210}>3 hours 30 minutes</option>
+      <option value={240}>4 hours</option>
+      <option value={270}>4 hours 30 minutes</option>
+      <option value={300}>5 hours</option>
+      <option value={330}>5 hours 30 minutes</option>
+      <option value={360}>6 hours</option>
+      <option value={390}>6 hours 30 minutes</option>
+      <option value={420}>7 hours</option>
+      <option value={450}>7 hours 30 minutes</option>
+      <option value={480}>8 hours</option>
+      <option value={510}>8 hours 30 minutes</option>
+      <option value={540}>9 hours</option>
+    </select>
+  </div>
+)}
+
       <div style={{ marginBottom: 15 }}>
         <label>Details</label>
         <br />
@@ -520,15 +636,18 @@ onChange={(e) => {
 
 
       <div style={{ display: "flex", gap: 10 }}>
-        <button onClick={saveAppointment}>
-          Save
+        <button
+            onClick={saveAppointment}
+            disabled={saving}
+        >
+            {saving ? "Creating..." : "Save"}
         </button>
 
         <button onClick={() => navigate("/alms-calendar")}>
           Cancel
         </button>
 
-        {!isNew && (
+        {!isNew && isAdmin && (
 <button
   onClick={() =>
     navigate(`/admin/delete/${id}`)

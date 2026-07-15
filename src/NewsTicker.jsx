@@ -4,10 +4,10 @@ const news = [
   "📢 Special Dhamma sermon by Hon. Ven. Kathnoruwe Siri Dhamma himi on 20th June Saturday at 5pm in English Dhamma Temple",
   "🪷 Sunday dhamma school students go on drama excursion on 14th June Sunday at 3pm in Cranbourne Community Theatre",
   "📅 Alms calendar bookings now open",
-  "🙏 Sunday Dhamma school kids enthusiastically participated for the Sil program!",
+  "🙏 Esala Poya sil program on 8th August.",
   "📖 Sunday School registrations are open",
-  "🌿 Sil program organized comemorating Poson festival held successfully on 27 June, 2026",
-  "🎓 Sunday dhamma school students paricipated for the valuable tour of parliament excursion",
+  "🌿 Sil program organized commemorating Poson festival held successfully on 27 June, 2026",
+  "🎓 Vas invitation ceremony is on 29th July, all are welcome!",
   "🤝 Temple car park is now open, we have capacity to park inside temple",
 ];
 

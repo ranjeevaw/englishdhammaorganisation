@@ -9,8 +9,6 @@ import enUS from "date-fns/locale/en-US";
 
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
-//import { format } from "date-fns";
-
 export const formatLocalDate = (date) =>
   format(date, "yyyy-MM-dd");
 
@@ -39,8 +37,25 @@ const buildDateTime = (dateStr, timeStr) => {
 };
 
 export default function CalendarPage() {
+  const isAdmin =
+    sessionStorage.getItem("isAdmin") === "true";
+
   const [events, setEvents] = useState([]);
   const navigate = useNavigate();
+
+  const eventPropGetter = (event) => {
+    if (event.deleted) {
+      return {
+        style: {
+          textDecoration: "line-through",
+          opacity: 0.5,
+          backgroundColor: "#999",
+        },
+      };
+    }
+
+    return {};
+  };
 
   const eventsRef = collection(db, "appointments");
 
@@ -55,29 +70,17 @@ export default function CalendarPage() {
         );
 
         // Default appointment duration = 30 minutes
-        const end = new Date(
-          start.getTime() + 30 * 60000
-        );
+const duration = d.duration || 30;
 
-const eventPropGetter = (event) => {
-  if (event.deleted) {
-    return {
-      style: {
-        textDecoration: "line-through",
-        opacity: 0.5,
-        backgroundColor: "#999",
-      },
-    };
-  }
-
-  return {};
-};
+const end = new Date(
+  start.getTime() + duration * 60000
+);
 
 return {
   id: doc.id,
-title: d.deleted
-  ? `[CANCELLED] ${d.name || "No Name"} - ${d.purpose || ""}`
-  : `${d.name || "No Name"} - ${d.purpose || ""}`,
+  title: d.deleted
+    ? `[CANCELLED] ${d.purpose || "BOOKED"}`
+    : `${d.purpose || "BOOKED"} - BOOKED`,
   start,
   end,
   raw: d,
@@ -113,19 +116,37 @@ const handleSelectSlot = (slotInfo) => {
 };
 
 const handleSelectEvent = (event) => {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
 
-  const eventDate = new Date(event.start);
-  eventDate.setHours(0, 0, 0, 0);
+    const today = new Date();
+    today.setHours(0,0,0,0);
 
-  if (eventDate < today) {
-    alert("Past appointments cannot be edited.");
-    return;
-  }
+    const eventDate = new Date(event.start);
+    eventDate.setHours(0,0,0,0);
 
-  navigate(`/appointment/${event.id}`);
+    if (eventDate < today) {
+        alert("Past appointments cannot be edited.");
+        return;
+    }
+
+    const isAdmin =
+        sessionStorage.getItem("isAdmin") === "true";
+
+    // Admin clicks a cancelled appointment
+    if (isAdmin && event.deleted) {
+        navigate(`/cancelled/${event.id}`);
+        return;
+    }
+
+    // Admin clicks an active appointment
+    if (isAdmin) {
+        navigate(`/appointment/${event.id}`);
+        return;
+    }
+
+    // Public user clicks an appointment
+    navigate(`/booking/${event.id}`);
 };
+
 
 const dayPropGetter = (date) => {
   const today = new Date();
@@ -154,9 +175,49 @@ const dayPropGetter = (date) => {
         flexDirection: "column",
       }}
     >
-      <h2 style={{ margin: "10px" }}>
-        📅 Appointments (දානය)  Calendar
-      </h2>
+<div
+  style={{
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    margin: "10px",
+  }}
+>
+  <h2>📅 Appointments (දානය) Calendar</h2>
+
+  {isAdmin ? (
+    <button
+      onClick={() => {
+        sessionStorage.removeItem("isAdmin");
+        window.location.reload();
+      }}
+      style={{
+        padding: "8px 12px",
+        cursor: "pointer",
+        background: "#c62828",
+        color: "white",
+        border: "none",
+        borderRadius: "6px",
+      }}
+    >
+      Logout Admin
+    </button>
+  ) : (
+    <button
+      onClick={() => navigate("/admin-login")}
+      style={{
+        padding: "8px 12px",
+        cursor: "pointer",
+        background: "#2e7d32",
+        color: "white",
+        border: "none",
+        borderRadius: "6px",
+      }}
+    >
+      Admin Login
+    </button>
+  )}
+</div>
 
 <div
   style={{
@@ -178,9 +239,9 @@ const dayPropGetter = (date) => {
     <li>Choose the appropriate meal offering type.</li>
     <li>Complete all required fields in the booking form.</li>
     <li>Only one booking is allowed per meal slot per day.</li>
-    <li>Click an existing booking to view or edit it.</li>
+    <li>Click an existing booking to view it. To change/cancel existing booking please contact us.</li>
     <li>Past appointments cannot be modified.</li>
-    <li>If you still have problems please contact us from the Contact Us Page.</li>
+    <li>If you still have problems/questions please contact us.</li>
   </ul>
 </div>
 
@@ -197,10 +258,11 @@ const dayPropGetter = (date) => {
   startAccessor="start"
   endAccessor="end"
   selectable
+  longPressThreshold={10}
   onSelectSlot={handleSelectSlot}
   onSelectEvent={handleSelectEvent}
   dayPropGetter={dayPropGetter}
-  //eventPropGetter={eventPropGetter}
+  eventPropGetter={eventPropGetter}
   style={{ height: "100%" }}
 />
       </div>
