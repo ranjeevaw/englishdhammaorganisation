@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { db } from "./firebase";
 import { useNavigate } from "react-router-dom";
 import { collection, onSnapshot } from "firebase/firestore";
-
+import { db, auth } from "./firebase";
+import { signOut } from "firebase/auth";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import { format, parse, startOfWeek, getDay } from "date-fns";
 import enUS from "date-fns/locale/en-US";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
@@ -37,13 +38,63 @@ const buildDateTime = (dateStr, timeStr) => {
 };
 
 export default function CalendarPage() {
-  const isAdmin =
-    sessionStorage.getItem("isAdmin") === "true";
 
+  const [user, loading] = useAuthState(auth);
   const [events, setEvents] = useState([]);
   const navigate = useNavigate();
 
-  const eventPropGetter = (event) => {
+const isAdmin = !!user;
+
+
+useEffect(() => {
+
+  const eventsRef = collection(db, "appointments");
+
+  const unsub = onSnapshot(eventsRef, (snapshot) => {
+
+    const data = snapshot.docs.map((doc) => {
+
+      const d = doc.data();
+
+      const start = buildDateTime(
+        d.apt_date,
+        d.apt_time
+      );
+
+      const duration = d.duration || 30;
+
+      const end = new Date(
+        start.getTime() + duration * 60000
+      );
+
+      return {
+        id: doc.id,
+        title: d.deleted
+          ? `[CANCELLED] ${d.purpose || "BOOKED"}`
+          : `${d.purpose || "BOOKED"} - BOOKED`,
+        start,
+        end,
+        raw: d,
+        deleted: d.deleted ?? false,
+      };
+
+    });
+
+    setEvents(data);
+
+  });
+
+  return () => unsub();
+
+}, []);
+
+
+if (loading) {
+  return <p>Loading...</p>;
+}
+
+
+const eventPropGetter = (event) => {
     if (event.deleted) {
       return {
         style: {
@@ -56,44 +107,6 @@ export default function CalendarPage() {
 
     return {};
   };
-
-  const eventsRef = collection(db, "appointments");
-
-  useEffect(() => {
-    const unsub = onSnapshot(eventsRef, (snapshot) => {
-      const data = snapshot.docs.map((doc) => {
-        const d = doc.data();
-
-        const start = buildDateTime(
-          d.apt_date,
-          d.apt_time
-        );
-
-        // Default appointment duration = 30 minutes
-const duration = d.duration || 30;
-
-const end = new Date(
-  start.getTime() + duration * 60000
-);
-
-return {
-  id: doc.id,
-  title: d.deleted
-    ? `[CANCELLED] ${d.purpose || "BOOKED"}`
-    : `${d.purpose || "BOOKED"} - BOOKED`,
-  start,
-  end,
-  raw: d,
-  deleted: d.deleted ?? false,
-};
-
-      });
-
-      setEvents(data);
-    });
-
-    return () => unsub();
-  }, []);
 
 const handleSelectSlot = (slotInfo) => {
   const selectedDate = new Date(slotInfo.start);
@@ -118,35 +131,28 @@ const handleSelectSlot = (slotInfo) => {
 const handleSelectEvent = (event) => {
 
     const today = new Date();
-    today.setHours(0,0,0,0);
+    today.setHours(0, 0, 0, 0);
 
     const eventDate = new Date(event.start);
-    eventDate.setHours(0,0,0,0);
+    eventDate.setHours(0, 0, 0, 0);
 
     if (eventDate < today) {
         alert("Past appointments cannot be edited.");
         return;
     }
 
-    const isAdmin =
-        sessionStorage.getItem("isAdmin") === "true";
-
-    // Admin clicks a cancelled appointment
     if (isAdmin && event.deleted) {
         navigate(`/cancelled/${event.id}`);
         return;
     }
 
-    // Admin clicks an active appointment
     if (isAdmin) {
         navigate(`/appointment/${event.id}`);
         return;
     }
 
-    // Public user clicks an appointment
     navigate(`/booking/${event.id}`);
 };
-
 
 const dayPropGetter = (date) => {
   const today = new Date();
@@ -187,10 +193,10 @@ const dayPropGetter = (date) => {
 
   {isAdmin ? (
     <button
-      onClick={() => {
-        sessionStorage.removeItem("isAdmin");
-        window.location.reload();
-      }}
+onClick={async () => {
+    await signOut(auth);
+    navigate("/admin-login");
+}}
       style={{
         padding: "8px 12px",
         cursor: "pointer",

@@ -7,12 +7,22 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "predeploy": "npm run build",
+    "build:web": "vite build",
+    "build:mobile": "vite build --mode mobile",
+    "predeploy": "npm run build:web",
     "deploy": "gh-pages -d dist",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "sync:ios": "npm run build:mobile && npx cap sync ios",
+    "sync:android": "npm run build:mobile && npx cap sync android",
+    "ios": "npm run sync:ios && npx cap open ios",
+    "android": "npm run sync:android && npx cap open android"
   },
   "dependencies": {
+    "@capacitor/android": "8.4.2",
+    "@capacitor/cli": "8.4.2",
+    "@capacitor/core": "8.4.2",
+    "@capacitor/ios": "8.4.2",
     "@emailjs/browser": "4.4.1",
     "@fullcalendar/daygrid": "6.1.20",
     "@fullcalendar/interaction": "6.1.20",
@@ -22,6 +32,7 @@
     "react": "^18.3.1",
     "react-big-calendar": "1.20.0",
     "react-dom": "^18.3.1",
+    "react-firebase-hooks": "5.1.1",
     "react-router-dom": "7.17.0"
   },
   "devDependencies": {
@@ -29,6 +40,7 @@
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.3",
+    "cross-env": "10.1.0",
     "eslint": "^9.13.0",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^5.0.0",

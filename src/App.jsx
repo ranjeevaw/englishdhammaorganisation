@@ -8,6 +8,7 @@ import NewsTicker from "./NewsTicker";
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import AdminLogin from "./AdminLogin";
+import ProtectedRoute from "./ProtectedRoute";
 import BookingView from "./BookingView";
 import CancelledAppointments from "./CancelledAppointments";
 
@@ -78,7 +79,13 @@ const sendContactEmail = async (e) => {
     <Link to="/">Home</Link>
     <Link to="/about">About Us</Link>
     <Link to="/events">Events</Link>
-    <Link to="/alms-calendar">Alms Calendar</Link>
+    <a
+      href="https://ranjeevaw.github.io/appointments-app/#/"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Alms Calendar
+    </a>
     <a
       href="https://ranjeevaw.github.io/englishdhammasundayschool/"
       target="_blank"
@@ -156,6 +163,47 @@ const sendContactEmail = async (e) => {
 
          May your generosity bring you and your loved ones peace, happiness, and abundant merit.</p>
     </div>
+
+<div className="sermon-card">
+
+  <img
+    src={`${import.meta.env.BASE_URL}/images/katina.jpg`}
+    alt="Esala Sil program"
+    className="sermon-image"
+  />
+  <div className="sermon-content">
+
+    <h3>🙏 English Dhamma Temple Katina Ceremony on 31st October, 2026</h3>
+
+    <h2>
+      English Dhamma Temple Katina Ceremony 2026
+    </h2>
+
+    <pre>
+      Dear Devotees,
+      If you would like to make offerings to the Ven.Monks on KATINA DAY(31/10/2026)here are the details.
+      1 Atapirikara - $250
+      1 Robes - $200
+      1 Muthu kuda $225
+
+      Please note, if you wish to purchase any offerings, contact us in advance as only the above offerings from our organization are allowed for the event.
+
+      ANZ bank
+      Account name - English Dhamma Org. Inc
+      BSB -013542
+      A/c -430308072
+
+      Please deposit money before the 25 th of September 2026
+
+      Thank you,
+      Janaki Rajaguru
+      President of English Dhamma Organisation
+      0406422873
+    </pre>
+
+  </div>
+
+</div>
 
 <div className="sermon-card">
 
@@ -415,20 +463,41 @@ Our Chief Incumbent is the Most Venerable Rev. Sewanagala Nandarathana Thero. He
 
 
 <Route path="/events" element={<Events />} />
-
-<Route path="/alms-calendar" element={<Calendar />} />
 <Route
-  path="/appointment/new"
-  element={<AppointmentNew />}
+    path="/alms-calendar"
+    element={
+            <Calendar />
+    }
 />
-<Route path="/admin/delete/:id" element={<AdminDelete />} />
 <Route
-  path="/appointment/:id"
-  element={<AppointmentDetails />}
+    path="/appointment/new"
+    element={
+            <AppointmentNew />
+    }
+/>
+<Route
+    path="/admin/delete/:id"
+    element={
+        <ProtectedRoute>
+            <AdminDelete />
+        </ProtectedRoute>
+    }
+/>
+<Route
+    path="/appointment/:id"
+    element={
+        <ProtectedRoute>
+            <AppointmentDetails />
+        </ProtectedRoute>
+    }
 />
 <Route
     path="/cancelled/:id"
-    element={<CancelledAppointments />}
+    element={
+        <ProtectedRoute>
+            <CancelledAppointments />
+        </ProtectedRoute>
+    }
 />
 <Route
   path="/contact"

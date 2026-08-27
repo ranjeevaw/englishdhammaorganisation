@@ -19,30 +19,33 @@ import {
   getDocs,
 } from "firebase/firestore";
 
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "./firebase";
+
 
 export default function EditAppointment() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-const isAdmin =
-    sessionStorage.getItem("isAdmin") === "true";
+const [user, authLoading] = useAuthState(auth);
 
 const isNew = !id;
+const isAdmin = !!user;
 
 useEffect(() => {
-    // Anyone can create a new booking.
-    // Only admins can edit an existing booking.
+    if (authLoading) return;
+
     if (!isNew && !isAdmin) {
         navigate("/alms-calendar");
     }
-}, [isAdmin, isNew, navigate]);
+}, [authLoading, isAdmin, isNew, navigate]);
 
   const [searchParams] = useSearchParams();
 
 const [error, setError] = useState("");
   //const isNew = !id;
 
-  const [loading, setLoading] = useState(true);
+const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
 
 const [appointment, setAppointment] = useState({
