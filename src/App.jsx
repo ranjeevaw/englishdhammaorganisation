@@ -167,8 +167,8 @@ const sendContactEmail = async (e) => {
 <div className="sermon-card">
 
   <img
-    src={`${import.meta.env.BASE_URL}/images/katina.jpg`}
-    alt="Esala Sil program"
+    src={`${import.meta.env.BASE_URL}/images/katina_new.jpg`}
+    alt="katina new"
     className="sermon-image"
   />
   <div className="sermon-content">
@@ -179,103 +179,45 @@ const sendContactEmail = async (e) => {
       English Dhamma Temple Katina Ceremony 2026
     </h2>
 
-    <pre>
-      Dear Devotees,
-      If you would like to make offerings to the Ven.Monks on KATINA DAY(31/10/2026)here are the details.
-      1 Atapirikara - $250
-      1 Robes - $200
-      1 Muthu kuda $225
-
-      Please note, if you wish to purchase any offerings, contact us in advance as only the above offerings from our organization are allowed for the event.
-
-      ANZ bank
-      Account name - English Dhamma Org. Inc
-      BSB -013542
-      A/c -430308072
-
-      Please deposit money before the 25 th of September 2026
-
-      Thank you,
-      Janaki Rajaguru
-      President of English Dhamma Organisation
-      0406422873
-    </pre>
-
-  </div>
-
-</div>
-
-<div className="sermon-card">
-
-  <img
-    src={`${import.meta.env.BASE_URL}/images/vas.jpg`}
-    alt="Vas Invitation"
-    className="sermon-image"
-  />
-  <div className="sermon-content">
-
-    <h3>🙏 Vas Invitation Ceremony is on 29th July, 2026</h3>
-
-    <h2>
-      Vas Invitation Ceremony is on 29th July
-    </h2>
-
     <p>
-      It's almost Esala poya and time to invite our reverend for the Vas ceremony.
-    </p>
-
-    <p>
-      Our reverend will devote to do meritorious deeds during this precious vas period and as devotees we need to invite the reverend.
-      We planned the ceremony on 29th July, Wednesday at 6pm (until 9pm). <br />
-      All are welcome!
+      Dear Devotees, <br />
+      If you would like to make offerings to the Ven.Monks on KATINA DAY(31/10/2026)here are the details. <br />
+      1 Atapirikara - $250 <br />
+      1 Robes - $200 <br />
+      1 Muthu kuda $225 <br />
+<br />
+      Please note, if you wish to purchase any offerings, contact us in advance as only the above offerings from our organization are allowed for the event. <br />
+<br />
+      ANZ bank <br />
+      Account name - English Dhamma Org. Inc <br />
+      BSB -013542 <br />
+      A/c -430308072 <br />
+<br />
+      Please deposit money before the 25 th of September 2026 <br />
+<br />
+      Thank you, <br />
+      Janaki Rajaguru <br />
+      President of English Dhamma Organisation <br />
+      0406422873 <br />
     </p>
 
   </div>
 
 </div>
 
-<div className="sermon-card">
 
-  <img
-    src={`${import.meta.env.BASE_URL}/images/kathnan.jpg`}
-    alt="Recent Dhamma sermon"
-    className="sermon-image"
-  />
-  <div className="sermon-content">
-
-    <h3>🙏 Most Recent Dhamma Sermon</h3>
-
-    <h2>
-      The dhamma sermon by Kathnoruwe himi
-    </h2>
-
-    <p>
-      Our recent English Dhamma sermon was conducted by
-      <strong> Ven. Kathnoruwe Siri Dhamma Thero</strong>,
-      bringing together members of our community for an
-      inspiring discussion on mindfulness, wisdom and compassion.
-    </p>
-
-    <p>
-      We sincerely thank everyone who attended and supported
-      this event. We look forward to welcoming you to our
-      future Dhamma programs.
-    </p>
-
-  </div>
-
-</div>
 
     <div className="activities-card">
       <h3>Our Activities</h3>
 
       <ul>
-        <li>🪷 Esala Sil program on TBD, All are welcome!</li>
+        <li>🪷 Katin ceremony 2026 on 31st October, 2026 !</li>
         <li>📖 Spread the word! We welcome students for our Dhamma school!</li>
         <li>🎓 English Dhamma Sunday School</li>
         <li>🙏 Almsgiving & Merit Sharing Programs, Go to the Alms calendar and reserve your date for Alms giving programs!</li>
         <li>🌱 Dhamma school special excursions. Parliament tour, Free Kids Drama, Many more to come!</li>
-        <li>🤝 Volunteer Opportunitiea, get in touch with our reverend to find out how you can voluenteer for various activities such as maintaining our beautiful Dhamma Temple garden and premises maintenance.</li>
+        <li>🤝 Volunteer Opportunities, get in touch with our reverend to find out how you can volunteer for various activities such as maintaining our
+            beautiful Dhamma Temple garden and premises maintenance.</li>
       </ul>
     </div>
 
@@ -437,18 +379,19 @@ Our President is Mrs. Janaki Rajaguru, the wife of well-known businessman Mr. An
       <div className="leader-card">
         <img
           src={`${import.meta.env.BASE_URL}chief-incumbent.jpg`}
-          alt="Chief Incumbent"
+          alt="Resident Monk"
           className="leader-photo"
         />
 
         <h3>Ven. Sewanagala Nandarathana Thero</h3>
 
         <p className="leader-title">
-          Chief Incumbent
+          Resident Monk
         </p>
 
         <p>
-Our Chief Incumbent is the Most Venerable Rev. Sewanagala Nandarathana Thero. He entered the monastic order at Siththamgalla Raja Maha Viharaya and pursued his higher studies under the guidance of the Most Venerable Agalabada Piyasiri Maha Nayaka thero and later stayed with Ven Seevali Thero in Ratnapura. After completing his higher education at the University of Kelaniya, he migrated to Australia and currently serves as the Chief Incumbent of the English Dhamma Temple located at 9 Beenak Road, Gembrook. The Thero is well known on YouTube, where several of his Dhamma sermons and teachings have reached millions of viewers worldwide. It is a great blessing and privilege for the students of our Sunday School to learn Buddhist doctrine under his guidance and benefit from his extensive knowledge of Buddhist philosophy and teachings.
+Our Resident Monk is the Most Venerable Rev. Sewanagala Nandarathana Thero. He entered the monastic order at Siththamgalla Raja Maha Viharaya and pursued his higher studies under the guidance of the Most Venerable Agalabada Piyasiri Maha Nayaka thero and later stayed with Ven Seevali Thero in Ratnapura. After completing his higher education at the University of Kelaniya, he migrated to Australia and currently serves as the
+Resident Monk of the English Dhamma Temple located at 9 Beenak Road, Gembrook. The Thero is well known on YouTube, where several of his Dhamma sermons and teachings have reached millions of viewers worldwide. It is a great blessing and privilege for the students of our Sunday School to learn Buddhist doctrine under his guidance and benefit from his extensive knowledge of Buddhist philosophy and teachings.
         </p>
       </div>
 
@@ -463,12 +406,7 @@ Our Chief Incumbent is the Most Venerable Rev. Sewanagala Nandarathana Thero. He
 
 
 <Route path="/events" element={<Events />} />
-<Route
-    path="/alms-calendar"
-    element={
-            <Calendar />
-    }
-/>
+
 <Route
     path="/appointment/new"
     element={

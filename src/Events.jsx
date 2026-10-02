@@ -5,14 +5,33 @@ const events = [
   {
     id: 2,
     type: "upcoming",
-    title: "Esala Sil Program",
-    date: "TBD",
+    title: "🌸 සදහම් වර්ෂා 🌸",
+    date: "29/8/2026",
     location: "English Dhamma Temple",
 media: [
 
 ],
     description:
-      "Annual Kathina ceremony with offerings and blessings.",
+      `🌸 සදහම් වර්ෂා 🌸
+
+       වස්සාන ධර්ම දේශනාව
+
+       📅 2026 අගෝස්තු මස 29 වන සෙනසුරාදා
+
+       🪷 සම්බුද්ධ වන්දනාව — ප.ව. 7.00
+       🪷 ධර්ම දේශනාව — ප.ව. 7.30
+
+       දේශකයාණන් වහන්සේ
+       🙏 පූජ්‍ය මැටරඹ නන්දාලෝක ස්වාමීන් වහන්සේ
+
+       මෙම උතුම් ධර්මානුශාසනාව සඳහා සැදැහැති දායකත්වය දක්වනු ලබන්නේ පින්වත් මංජුල මහත්මා, විරාජිනී මහත්මිය ඇතුළු පවුලේ සියලුම පින්වතුන් විසිනි.
+
+       මෙම උතුම් පින්කමට සහභාගී වී, ධර්මානුශාසනාව ශ්‍රවණය කරමින් උතුම් පින් රැස් කරගන්නා ලෙස සියලුම දායක කාරකාදී පින්වතුන් වෙත මෙත් සිතින් ආරාධනා කර සිටිමි.
+
+       🙏 තෙරුවන් සරණයි! 🙏
+
+       විහාරාධිපති
+       පූජ්‍ය සෙවනගල නන්දරතන හිමි`,
   },
     {
         id: 3,
@@ -113,11 +132,11 @@ media: [
       src: `${import.meta.env.BASE_URL}videos/b1.mp4`,
     },
     ],
-description: `Our heartfelt gratitude to our devotee, Mr. G. Bandara, for holding the Alms Giving Ceremony at our temple in remembrance of his beloved father and his former teachers.
+description: `Our heartfelt gratitude to our devotee, Mr. Aruna Bandara, for holding the Alms Giving Ceremony at our temple in remembrance of his beloved father and his former teachers.
 
 May the merits of this wholesome offering be shared with his beloved father, his former teachers, and all departed loved ones.
 
-May Mr. G. Bandara and his family be blessed with good health, happiness, peace, and prosperity.
+May Mr. A. Bandara and his family be blessed with good health, happiness, peace, and prosperity.
 
 May all rejoice in these merits. 🙏`,
   },
